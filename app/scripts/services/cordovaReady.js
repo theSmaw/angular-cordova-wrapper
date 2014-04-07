@@ -1,17 +1,18 @@
 'use strict';
 
 angular.module('angularCordovaWrapper')
-    .factory('cordovaReady', function($q, $timeout, $document) {
+    .factory('cordovaReady', function($q, $timeout, $window) {
         var svc = {};
 
         svc.ready = function() {
             var deferred = $q.defer();
 
-            $document.bind('deviceready', function() {
+            $window.document.addEventListener('deviceready', function() {
+
                 $timeout(function () {
                     deferred.resolve('cordova ready');
                 });
-            });
+            }, false);
 
             return deferred.promise;
         };

@@ -253,7 +253,7 @@ module.exports = function (grunt) {
             }
         },
 
-    // Replace Google CDN references
+        // Replace Google CDN references
         cdnify: {
             dist: {
                 html: ['<%= yeoman.dist %>/*.html']
@@ -320,11 +320,11 @@ module.exports = function (grunt) {
         //   }
         // },
         uglify: {
-            my_target: {
-             files: {
-               'release/angular-cordova-wrapper.js': ['.tmp/concat/scripts/**/*.js']
-             }
-           }
+            myTarget: {
+                files: {
+                    'release/angular-cordova-wrapper.js': ['.tmp/concat/scripts/**/*.js']
+                }
+            }
         },
         // concat: {
         //   dist: {}

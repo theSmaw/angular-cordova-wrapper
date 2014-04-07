@@ -1,1 +1,108 @@
-"use strict";angular.module("angularCordovaWrapper",[]),angular.module("angularCordovaWrapper").factory("cordovaContacts",["$q","$log","$window",function(a,b,c){var d={};return d.createContact=function(d){var e=a.defer();b.debug("cordovaContacts: create");var f=c.navigator.contacts.create(d);return e.resolve(f),b.debug("cordovaContacts: contact created"),e.promise},d.findContacts=function(d,e){var f=a.defer();return b.debug("cordovaContacts: find"),c.navigator.contacts.find(d,function(a){b.debug("cordovaContacts: find: success"),f.resolve(a)},function(a){b.debug("cordovaContacts: find: error"),f.resolve(a)},e),b.debug("cordovaContacts: find: return promise"),f.promise},d}]),angular.module("angularCordovaWrapper").factory("cordovaNetworkInformation",["cordovaReady","$rootScope","$document","$window",function(a,b,c,d){a.ready().then(function(){c.bind("online",function(){b.$broadcast("Cordova.NetworkStatus.Online")}),c.bind("offline",function(){b.$broadcast("Cordova.NetworkStatus.Offline")})});var e={};return e.checkConnection=function(){return d.navigator.connection.type},e.isOnline=function(){var a;return a=this.checkConnection()===d.Connection.UKNOWN||this.checkConnection()===d.Connection.UKNOWN?!1:!0},e}]),angular.module("angularCordovaWrapper").factory("cordovaReady",["$q","$timeout","$document",function(a,b,c){var d={};return d.ready=function(){var d=a.defer();return c.bind("deviceready",function(){b(function(){d.resolve("cordova ready")})}),d.promise},d}]);
+'use strict';
+
+angular
+    .module('angularCordovaWrapper', []);
+
+
+'use strict';
+
+angular.module('angularCordovaWrapper')
+    .factory('cordovaContacts', function ($q, $log, $window) {
+        var svc = {};
+
+        svc.createContact = function (options) {
+            var def = $q.defer();
+            $log.debug('cordovaContacts: create');
+            var contact = $window.navigator.contacts.create(options);
+            def.resolve(contact);
+            $log.debug('cordovaContacts: contact created');
+            return def.promise;
+        };
+
+        svc.findContacts = function (contactFields, contactFindOptions) {
+            var def = $q.defer();
+            $log.debug('cordovaContacts: find');
+            $window.navigator.contacts.find(
+                contactFields,
+                function (results) {
+                    $log.debug('cordovaContacts: find: success');
+                    def.resolve(results);
+                },
+                function (error) {
+                    $log.debug('cordovaContacts: find: error');
+                    def.resolve(error);
+                },
+                contactFindOptions
+            );
+
+            $log.debug('cordovaContacts: find: return promise');
+            return def.promise;
+
+        };
+
+        return svc;
+    });
+
+'use strict';
+
+angular.module('angularCordovaWrapper')
+    .factory('cordovaNetworkInformation', function (cordovaReady, $rootScope, $document, $window) {
+
+        cordovaReady.ready()
+            .then(function () {
+                $document.bind('online', function () {
+                    $rootScope.$broadcast('Cordova.NetworkStatus.Online');
+                });
+                $document.bind('offline', function () {
+                    $rootScope.$broadcast('Cordova.NetworkStatus.Offline');
+                });
+            });
+
+
+        var svc = {};
+
+        svc.checkConnection = function() {
+            return $window.navigator.connection.type;
+        };
+
+        svc.isOnline = function () {
+            var online;
+
+            if((this.checkConnection() === $window.Connection.UKNOWN) || (this.checkConnection() === $window.Connection.UKNOWN)) {
+                online = false;
+            } else {
+                online = true;
+            }
+
+            return online;
+        };
+
+        return svc;
+    });
+
+'use strict';
+
+angular.module('angularCordovaWrapper')
+    .factory('cordovaReady', function($q, $log, $timeout, $document) {
+        var svc = {};
+
+        svc.ready = function() {
+            var deferred = $q.defer();
+
+            var ben = "TWENTY";
+
+            $log.debug('waiting for device ready');
+            $document.bind('deviceready', function() {
+
+                $log.debug('device is ready');
+                $timeout(function () {
+                    $log.debug('resolve me');
+                    deferred.resolve('cordova ready');
+                });
+            });
+
+            return deferred.promise;
+        };
+
+        return svc;
+    });
