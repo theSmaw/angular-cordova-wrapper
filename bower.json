@@ -1,5 +1,6 @@
 {
   "name": "angular-cordova-wrapper",
+  "main": "release/angular-cordova-wrapper.js",
   "version": "0.0.0",
   "dependencies": {
     "angular": "1.2.15",

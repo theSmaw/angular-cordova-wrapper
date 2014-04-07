@@ -319,15 +319,16 @@ module.exports = function (grunt) {
         //     }
         //   }
         // },
-        // uglify: {
-        //   dist: {
-        //     files: {
-        //       '<%= yeoman.dist %>/scripts/scripts.js': [
-        //         '<%= yeoman.dist %>/scripts/scripts.js'
-        //       ]
-        //     }
-        //   }
-        // },
+        uglify: {
+            my_target: {
+             files: {
+               'release/angular-cordova-wrapper.js': [
+                 'app/scripts/*.js',
+                 'app/scripts/**/*.js'
+               ]
+             }
+           }
+        },
         // concat: {
         //   dist: {}
         // },
