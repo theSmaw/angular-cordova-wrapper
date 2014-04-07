@@ -32,21 +32,38 @@ We wanted to have a well-tested and complete set of APIs that wrapped the Cordov
 ## Installation
 
 ```
-npm install -g yo
-npm install
-bower install
+bower install angular-cordova-wrapper --save
 ```
 
 ## API Reference
 
 The library currently supports the following plugins:
 
-# Contacts
+### Contacts
 
-# Network Connectivity
+> API reference coming soon
+
+### Network Connectivity
+
+> API reference coming soon
+
+## Contributing
+
+We welcome contributions to the project. Editorconfig and jshintrc should take care of most of the coding conventions,
+for all others please use the existing code as a style guide.
+
+After cloning the repo, run:
+```
+npm install -g yo
+npm install
+bower install
+```
+We operate in a TDD manner to keep our design and implementation as small and simple as possible. We ask that you keep simplicity to the fore when contributing.
+Please log any issues here in the Github repo issue tracker.
 
 ## Tests
 
+We use Mocha, along with Chai, Sinon and associated plugins, these are all in the package.json so nothing extra to do here.
 Tests are run with Karma via Grunt.
 
 * Local development:
@@ -57,10 +74,6 @@ grunt test
 ```
 grunt ci
 ```
-
-## Contributors
-
-Let people know how they can dive into the project, include important links to things like issue trackers, irc, twitter accounts if applicable.
 
 ## License
 
