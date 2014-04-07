@@ -335,8 +335,15 @@ module.exports = function (grunt) {
 
         // Test settings
         karma: {
-            unit: {
-                configFile: 'karma.conf.js',
+            options: {
+                configFile: 'karma.conf.js'
+            },
+            local: {
+                browsers: ['Chrome'],
+                singleRun: true
+            },
+            ci: {
+                browsers: ['PhantomJS'],
                 singleRun: true
             }
         }
@@ -368,7 +375,15 @@ module.exports = function (grunt) {
         'concurrent:test',
         'autoprefixer',
         'connect:test',
-        'karma'
+        'watch:jsTest'
+    ]);
+
+    grunt.registerTask('ci', [
+        'clean:server',
+        'concurrent:test',
+        'autoprefixer',
+        'jshint',
+        'karma:ci'
     ]);
 
     grunt.registerTask('build', [

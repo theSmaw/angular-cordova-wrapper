@@ -1,14 +1,31 @@
 {
-  "name": "angular-cordova-wrapper",
-  "main": "release/angular-cordova-wrapper.js",
-  "version": "0.0.0",
-  "dependencies": {
-    "angular": "1.2.15",
-    "json3": "~3.2.6",
-    "es5-shim": "~2.1.0"
-  },
-  "devDependencies": {
-    "angular-mocks": "1.2.15",
-    "angular-scenario": "1.2.15"
-  }
+    "name": "angular-cordova-wrapper",
+    "main": "release/angular-cordova-wrapper.js",
+    "version": "0.1.0",
+    "description": "Angular-Cordova-Wrapper is an AngularJS library that wraps the API for each of the Cordova plugins. It has been designed with promises in mind.",
+    "license": "MIT",
+    "keywords": ["angular", "cordova"],
+    "ignore": [
+        "./test/*",
+        "./scripts/*",
+        ".jshintrc",
+        "Gruntfile.js",
+        "karma.conf.js",
+        ".gitignore",
+        ".gitattributes",
+        ".editorconfig"
+    ],
+    "repository" :{
+        "type" : "git",
+        "url" : "https://github.com/connectid/angular-cordova-wrapper.git"
+    },
+    "dependencies": {
+        "angular": "1.2.15",
+        "json3": "~3.2.6",
+        "es5-shim": "~2.1.0"
+    },
+    "devDependencies": {
+        "angular-mocks": "1.2.15",
+        "angular-scenario": "1.2.15"
+    }
 }
