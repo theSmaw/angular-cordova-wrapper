@@ -246,9 +246,9 @@ module.exports = function (grunt) {
             dist: {
                 files: [{
                     expand: true,
-                    cwd: '.tmp/concat/scripts',
+                    cwd: '.tmp/concat/',
                     src: '*.js',
-                    dest: '.tmp/concat/scripts'
+                    dest: '.tmp/concat/'
                 }]
             }
         },
@@ -320,18 +320,30 @@ module.exports = function (grunt) {
         //   }
         // },
         uglify: {
-            my_target: { // jshint ignore:line
+            myTarget: {
                 files: {
                     'release/angular-cordova-wrapper.min.js': [
-                        'app/scripts/*.js',
-                        'app/scripts/**/*.js'
+                        '.tmp/concat/*.js'
                     ]
                 }
             }
         },
-        // concat: {
-        //   dist: {}
-        // },
+        concat: {
+            options: {
+                banner: "'use strict';\n",
+                process: function(src, filepath) {
+                    return '// Source: ' + filepath + '\n' +
+                        src.replace(/(^|\n)[ \t]*('use strict'|"use strict");?\s*/g, '$1');
+                }
+            },
+            dist: {
+                src: [
+                    './app/scripts/*.js',
+                    './app/scripts/services/*.js'
+                ],
+                dest: '.tmp/concat/scripts.js'
+            }
+        },
 
         // Test settings
         karma: {
@@ -345,6 +357,19 @@ module.exports = function (grunt) {
             ci: {
                 browsers: ['PhantomJS'],
                 singleRun: true
+            },
+            postBuild: {
+                options: {
+                    browsers: ['PhantomJS'],
+                    singleRun: true,
+                    files: [
+                        'app/bower_components/angular/angular.js',
+                        'app/bower_components/angular-mocks/angular-mocks.js',
+                        'release/*.js',
+                        'test/mock/**/*.js',
+                        'test/spec/**/*.js'
+                    ]
+                }
             }
         }
     });
@@ -388,12 +413,11 @@ module.exports = function (grunt) {
 
     grunt.registerTask('build', [
         'clean:dist',
-        'bowerInstall',
+        'concat:dist',
         'ngmin',
-        'copy:dist',
-        'cdnify',
         'uglify',
-        'rev'
+        'rev',
+        'karma:postBuild'
     ]);
 
     grunt.registerTask('default', [

@@ -117,23 +117,4 @@ describe('Service: cordovaContacts', function () {
             });
         });
     });
-
-    describe('service errors', function () {
-
-        it.skip('should throw an error when required dependency is missing', function () {
-            // Use an anonymous function to wrap the code that will fail
-            function wrapper() {
-                // Inject WITHOUT providing required values
-                _inject();
-            }
-
-            expect(wrapper).to.throw('cordovaContacts:  not provided');
-            /*
-             Note: you can use Function.bind to avoid an anonymous function wrapper for inject,
-             however, you'll need a polyfill for PhantomJS such as: http://goo.gl/XSLOdx
-             var svc = function (cordovaContacts) {};
-             expect(inject.bind(null, svc)).toThrow('cordovaContacts:  not provided');
-             */
-        });
-    });
 });
