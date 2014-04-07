@@ -22,7 +22,7 @@ module.exports = function (grunt) {
         yeoman: {
             // configurable paths
             app: require('./bower.json').appPath || 'app',
-            dist: 'dist'
+            dist: 'release'
         },
 
         // Watches files for changes and runs tasks based on the changed files
@@ -246,8 +246,8 @@ module.exports = function (grunt) {
             dist: {
                 files: [{
                     expand: true,
-                    cwd: 'app/scripts',
-                    src: ['**/*.js'],
+                    cwd: '.tmp/concat/scripts',
+                    src: '*.js',
                     dest: '.tmp/concat/scripts'
                 }]
             }
@@ -320,9 +320,12 @@ module.exports = function (grunt) {
         //   }
         // },
         uglify: {
-            myTarget: {
+            my_target: { // jshint ignore:line
                 files: {
-                    'release/angular-cordova-wrapper.js': ['.tmp/concat/scripts/**/*.js']
+                    'release/angular-cordova-wrapper.min.js': [
+                        'app/scripts/*.js',
+                        'app/scripts/**/*.js'
+                    ]
                 }
             }
         },
