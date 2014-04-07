@@ -1,4 +1,4 @@
-## Synopsis
+## Overview
 
 Angular-Cordova-Wrapper is an AngularJS library that wraps the API for each of the Cordova plugins. It has been designed with promises in mind.
 
