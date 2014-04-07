@@ -320,14 +320,14 @@ module.exports = function (grunt) {
         //   }
         // },
         uglify: {
-            my_target: {
-             files: {
-               'release/angular-cordova-wrapper.js': [
-                 'app/scripts/*.js',
-                 'app/scripts/**/*.js'
-               ]
-             }
-           }
+            my_target: { // jshint ignore:line
+                files: {
+                    'release/angular-cordova-wrapper.js': [
+                        'app/scripts/*.js',
+                        'app/scripts/**/*.js'
+                    ]
+                }
+            }
         },
         // concat: {
         //   dist: {}
