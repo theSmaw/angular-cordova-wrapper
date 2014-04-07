@@ -7,6 +7,7 @@
 describe('Service: cordovaContacts', function () {
     var cordovaContacts;
     var $rootScope;
+    var $timeout;
 
     // Use to provide any mocks needed
     function _provide(callback) {
@@ -18,9 +19,10 @@ describe('Service: cordovaContacts', function () {
 
     // Use to inject the code under test
     function _inject() {
-        inject(function (_cordovaContacts_, _$rootScope_) {
+        inject(function (_cordovaContacts_, _$rootScope_, _$timeout_) {
             cordovaContacts = _cordovaContacts_;
             $rootScope = _$rootScope_;
+            $timeout = _$timeout_;
         });
     }
 
@@ -61,8 +63,8 @@ describe('Service: cordovaContacts', function () {
                 cordovaContacts.createContact({displayName: 'Foo Bar'}).then(function (returned) {
                     contact = returned;
                 });
-                $rootScope.$apply()
-                expect(contact).to.be.an('object')
+                $rootScope.$apply();
+                expect(contact).to.be.an('object');
                 expect(contact.displayName).to.equal('Foo Bar');
 
             })
@@ -74,12 +76,45 @@ describe('Service: cordovaContacts', function () {
                 expect(cordovaContacts.findContacts).to.exist;
             });
 
-            it('can return a singular contact object');
+            it('can return multiple contact objects', function () {
+                var contact;
+                cordovaContacts.findContacts(['id', 'name'])
+                    .then(function (result) {
+                        contact = result;
+                    });
+                $rootScope.$apply();
+                expect(contact).to.have.length(2);
+            });
 
-            it('can return multiple contact objects');
+            it('can handle errors and return a rejected promise', function () {
+                var error;
+                cordovaContacts.findContacts()
+                    .then(function (err) {
+                        error = err;
+                    });
+                $rootScope.$apply();
+                expect(error).to.equal('error');
+            });
 
+            it('can accept a filter and return a single contact object', function () {
+                var contact;
+                cordovaContacts.findContacts(['id', 'name'], {filter: "", multiple: false})
+                    .then(function (result) {
+                        contact = result;
+                    });
+                $rootScope.$apply();
+                expect(contact).to.deep.equal({id:1, name:'john'});
+            });
 
-
+            it('can accept a filter and return multiple objects', function () {
+                var contact;
+                cordovaContacts.findContacts(['id', 'name'])
+                    .then(function (result) {
+                        contact = result;
+                    });
+                $rootScope.$apply();
+                expect(contact).to.have.length(2);
+            });
         });
     });
 
