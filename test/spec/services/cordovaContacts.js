@@ -67,7 +67,7 @@ describe('Service: cordovaContacts', function () {
                 expect(contact).to.be.an('object');
                 expect(contact.displayName).to.equal('Foo Bar');
 
-            })
+            });
         });
 
         describe('find method', function () {
@@ -98,7 +98,7 @@ describe('Service: cordovaContacts', function () {
 
             it('can accept a filter and return a single contact object', function () {
                 var contact;
-                cordovaContacts.findContacts(['id', 'name'], {filter: "", multiple: false})
+                cordovaContacts.findContacts(['id', 'name'], {filter: '', multiple: false})
                     .then(function (result) {
                         contact = result;
                     });
