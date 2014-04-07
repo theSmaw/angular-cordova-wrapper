@@ -5,7 +5,8 @@ angular.module('mockCordova', [])
     .factory('mock$window', function () {
         var mockWindow = {
             navigator: {
-                contacts:{}
+                contacts:{},
+                connection:{}
             }
         };
 
@@ -36,6 +37,18 @@ angular.module('mockCordova', [])
                 success(mockData);
             }
         };
+
+        mockWindow.Connection = {
+            'ETHERNET': 'ETHERNET',
+            'WIFI': 'WIFI',
+            'CELL_2G': 'CELL_2G',
+            'CELL_3G': 'CELL_3G',
+            'CELL_4G': 'CELL_4G',
+            'CELL': 'CELL',
+            'EDGE': 'EDGE',
+            'UNKNOWN': 'unknown'
+        };
+        mockWindow.navigator.connection.type = mockWindow.Connection.NONE;
 
         return mockWindow;
     });
