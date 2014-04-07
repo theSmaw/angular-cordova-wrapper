@@ -3,14 +3,17 @@
 describe('Service: cordovaReady', function () {
 
     var SUT;
-    var mockDocument;
+    var mockWindow;
     var $timeout;
-    function createMockDocument() {
-        mockDocument = {
-            bind: sinon.spy()
+    function createMockWindow() {
+        mockWindow = {
+            document: {
+
+                addEventListener: sinon.spy()
+            }
         };
 
-        return mockDocument;
+        return mockWindow;
     }
 
     // Use to provide any mocks needed
@@ -33,7 +36,7 @@ describe('Service: cordovaReady', function () {
     function _setup() {
         // Mock any expected data
         _provide(function (provide) {
-            provide.value('$document', createMockDocument());
+            provide.value('$window', createMockWindow());
 
         });
 
@@ -59,7 +62,7 @@ describe('Service: cordovaReady', function () {
         SUT.ready().then(function(returned) {
             valueToVerify = returned;
         });
-        mockDocument.bind.args[0][1]();
+        mockWindow.document.addEventListener.args[0][1]();
         $timeout.flush();
 
         expect(valueToVerify).to.equal('cordova ready');
