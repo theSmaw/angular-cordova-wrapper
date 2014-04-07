@@ -330,7 +330,7 @@ module.exports = function (grunt) {
         },
         concat: {
             options: {
-                banner: "'use strict';\n",
+                banner: "'use strict';\n", //jshint ignore:line
                 process: function(src, filepath) {
                     return '// Source: ' + filepath + '\n' +
                         src.replace(/(^|\n)[ \t]*('use strict'|"use strict");?\s*/g, '$1');
@@ -412,6 +412,7 @@ module.exports = function (grunt) {
     ]);
 
     grunt.registerTask('build', [
+        'newer:jshint',
         'clean:dist',
         'concat:dist',
         'ngmin',
