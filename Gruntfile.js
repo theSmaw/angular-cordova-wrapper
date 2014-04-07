@@ -389,18 +389,11 @@ module.exports = function (grunt) {
     grunt.registerTask('build', [
         'clean:dist',
         'bowerInstall',
-        'useminPrepare',
-        'concurrent:dist',
-        'autoprefixer',
-        'concat',
         'ngmin',
         'copy:dist',
         'cdnify',
-        'cssmin',
         'uglify',
-        'rev',
-        'usemin',
-        'htmlmin'
+        'rev'
     ]);
 
     grunt.registerTask('default', [
