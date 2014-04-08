@@ -42,7 +42,8 @@ describe('Service: cordovaContacts', function () {
         module('angularCordovaWrapper');
     });
 
-    describe('the service api', function () {
+    describe('the service api:', function () {
+
         beforeEach(function () {
             // Inject with expected values
             _setup();
@@ -52,7 +53,8 @@ describe('Service: cordovaContacts', function () {
             expect(cordovaContacts).to.exist;
         });
 
-        describe('create method', function () {
+
+        describe('createContact method', function () {
 
             it('should exist', function () {
                 expect(cordovaContacts.createContact).to.exist;
@@ -70,7 +72,8 @@ describe('Service: cordovaContacts', function () {
             });
         });
 
-        describe('find method', function () {
+
+        describe('findContacts method', function () {
 
             it('should exist', function () {
                 expect(cordovaContacts.findContacts).to.exist;
@@ -115,6 +118,30 @@ describe('Service: cordovaContacts', function () {
                 $rootScope.$apply();
                 expect(contact).to.have.length(2);
             });
+        });
+
+
+        describe('saveContacts method', function () {
+
+            it('should exist');
+
+            it('can save a single contact');
+
+            it('can save multiple contacts');
+
+            it('returns an error if a contact cannot be saved');
+        });
+
+
+        describe('removeContacts method', function () {
+
+            it('should exist');
+
+            it('can remove a single contact');
+
+            it('can remove multiple contacts');
+
+            it('returns an error if it cannot remove a contact');
         });
     });
 });
