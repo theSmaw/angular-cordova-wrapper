@@ -34,5 +34,23 @@ angular.module('angularCordovaWrapper')
 
         };
 
+        svc.save = function (contactObject) {
+            var def = $q.defer();
+
+            function onSuccess() {
+                $log.debug('contact saved successfully');
+                def.resolve('contact saved successfully');
+            }
+
+            function onFail(error) {
+                $log.debug('error: ' + error);
+                def.resolve(error || 'error');
+            }
+
+            contactObject.save(onSuccess, onFail);
+
+            return def.promise;
+        };
+
         return svc;
     });

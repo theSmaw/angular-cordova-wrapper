@@ -8,6 +8,15 @@ describe('Service: cordovaContacts', function () {
     var cordovaContacts;
     var $rootScope;
     var $timeout;
+    var mockContact;
+
+    function createMockContact() {
+        mockContact = {
+            save: sinon.spy()
+        };
+
+        return mockContact;
+    }
 
     // Use to provide any mocks needed
     function _provide(callback) {
@@ -123,13 +132,36 @@ describe('Service: cordovaContacts', function () {
 
         describe('saveContacts method', function () {
 
-            it('should exist');
+            it('should exist', function () {
+                expect(cordovaContacts.save).to.exist;
+            });
 
-            it('can save a single contact');
+            it('calls the correct Cordova method', function () {
+                var contact = cordovaContacts.createContact({displayName: 'Foo Bar'});
+                contact.save = sinon.spy();
+                cordovaContacts.save(contact);
+                expect(contact.save).to.have.been.called;
+            });
 
-            it('can save multiple contacts');
+            it('confirms when saved successfully', function () {
+                var promise;
+                cordovaContacts.save(createMockContact()).then(function (result) {
+                    promise = result;
+                });
+                mockContact.save.args[0][0]();
+                $rootScope.$apply();
+                expect(promise).to.equal('contact saved successfully');
+            });
 
-            it('returns an error if a contact cannot be saved');
+            it('returns an error if a contact cannot be saved', function () {
+                var promise;
+                cordovaContacts.save(createMockContact()).then(function (result) {
+                    promise = result;
+                });
+                mockContact.save.args[0][1]();
+                $rootScope.$apply();
+                expect(promise).to.equal('error');
+            });
         });
 
 
@@ -138,8 +170,6 @@ describe('Service: cordovaContacts', function () {
             it('should exist');
 
             it('can remove a single contact');
-
-            it('can remove multiple contacts');
 
             it('returns an error if it cannot remove a contact');
         });
