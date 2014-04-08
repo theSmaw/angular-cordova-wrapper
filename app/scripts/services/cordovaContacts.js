@@ -23,7 +23,7 @@ angular.module('angularCordovaWrapper')
                     def.resolve(results);
                 },
                 function (error) {
-                    $log.debug('cordovaContacts: find: error');
+                    $log.error('cordovaContacts: find: error');
                     def.resolve(error);
                 },
                 contactFindOptions
@@ -43,7 +43,7 @@ angular.module('angularCordovaWrapper')
             }
 
             function onFail(error) {
-                $log.debug('error: ' + error);
+                $log.error('error: ' + error);
                 def.resolve(error || 'error');
             }
 
@@ -62,7 +62,7 @@ angular.module('angularCordovaWrapper')
             }
 
             function onFail(error){
-                $log.debug('error: ' + error);
+                $log.error('error: ' + error);
                 def.resolve(error || 'error');
             }
 
