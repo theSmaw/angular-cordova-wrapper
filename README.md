@@ -1,3 +1,6 @@
+![Master Branch build status](https://circleci.com/gh/connectid/angular-cordova-wrapper.png?circle-token=3cf79bb5063b5d4fda40eb4117e261bd6d9375c0)
+![Dependencies status](https://david-dm.org/connectid/angular-cordova-wrapper.png)
+
 ## Overview
 
 Angular-Cordova-Wrapper is an AngularJS library that wraps the API for each of the Cordova plugins. It has been designed with promises in mind.
