@@ -9,7 +9,7 @@ Angular-Cordova-Wrapper is an AngularJS library that wraps the API for each of t
 
 Add the source file to your html:
 ```html
-<script src="bower_components/angular-cordova-wrapper/release/angular-cordova-wrapper.js"></script>
+<script src="bower_components/angular-cordova-wrapper/release/angular-cordova-wrapper.min.js"></script>
 ```
 
 Add the library as a dependency for your module:
