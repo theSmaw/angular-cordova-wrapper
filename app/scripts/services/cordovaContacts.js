@@ -52,5 +52,24 @@ angular.module('angularCordovaWrapper')
             return def.promise;
         };
 
+        svc.remove = function (contactObject) {
+
+            var def = $q.defer();
+
+            function onSuccess(){
+                $log.debug('contact removed successfully');
+                def.resolve('contact removed successfully');
+            }
+
+            function onFail(error){
+                $log.debug('error: ' + error);
+                def.resolve(error || 'error');
+            }
+
+            contactObject.remove(onSuccess, onFail);
+
+            return def.promise;
+        };
+
         return svc;
     });

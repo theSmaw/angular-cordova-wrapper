@@ -12,7 +12,8 @@ describe('Service: cordovaContacts', function () {
 
     function createMockContact() {
         mockContact = {
-            save: sinon.spy()
+            save: sinon.spy(),
+            remove: sinon.spy()
         };
 
         return mockContact;
@@ -130,13 +131,13 @@ describe('Service: cordovaContacts', function () {
         });
 
 
-        describe('saveContacts method', function () {
+        describe('save method', function () {
 
             it('should exist', function () {
                 expect(cordovaContacts.save).to.exist;
             });
 
-            it('calls the correct Cordova method', function () {
+            it('calls the correct Cordova "save" method', function () {
                 var contact = cordovaContacts.createContact({displayName: 'Foo Bar'});
                 contact.save = sinon.spy();
                 cordovaContacts.save(contact);
@@ -165,13 +166,38 @@ describe('Service: cordovaContacts', function () {
         });
 
 
-        describe('removeContacts method', function () {
+        describe('remove method', function () {
 
-            it('should exist');
+            it('should exist', function () {
+                expect(cordovaContacts.remove).to.exist;
+            });
 
-            it('can remove a single contact');
+            it('calls the correct Cordova "remove" method', function () {
+                var contact = cordovaContacts.createContact({id: 1});
+                contact.remove = sinon.spy();
+                cordovaContacts.remove(contact);
+                expect(contact.remove).to.have.been.called;
+            });
 
-            it('returns an error if it cannot remove a contact');
+            it('confirms it removed the contact successfully', function () {
+                var promise;
+                cordovaContacts.remove(createMockContact()).then(function (result) {
+                    promise = result;
+                });
+                mockContact.remove.args[0][0]();
+                $rootScope.$apply();
+                expect(promise).to.equal('contact removed successfully');
+            });
+            
+            it('returns an error if it cannot remove a contact', function () {
+                var promise;
+                cordovaContacts.remove(createMockContact()).then(function (result) {
+                    promise = result;
+                });
+                mockContact.remove.args[0][1]();
+                $rootScope.$apply();
+                expect(promise).to.equal('error');
+            });
         });
     });
 });
