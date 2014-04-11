@@ -1,7 +1,7 @@
 {
     "name": "angular-cordova-wrapper",
     "main": "release/angular-cordova-wrapper.min.js",
-    "version": "0.1.1",
+    "version": "0.1.2",
     "description": "Angular-Cordova-Wrapper is an AngularJS library that wraps the API for each of the Cordova plugins. It has been designed with promises in mind.",
     "license": "MIT",
     "keywords": ["angular", "cordova"],
