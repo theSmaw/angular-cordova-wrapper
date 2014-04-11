@@ -127,6 +127,8 @@ describe('Service: cordovaNetworkInformation', function () {
                     expect(network.isOnline()).to.be.true;
                     mockWindow.navigator.connection.type = mockWindow.Connection.NONE;
                     expect(network.isOnline()).to.be.false;
+                    mockWindow.navigator.connection.type = mockWindow.Connection.UNKNOWN;
+                    expect(network.isOnline()).to.be.false;
                 });
             });
         });

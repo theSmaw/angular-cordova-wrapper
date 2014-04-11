@@ -23,7 +23,7 @@ angular.module('angularCordovaWrapper')
         svc.isOnline = function () {
             var online;
 
-            if((this.checkConnection() === $window.Connection.UKNOWN) || (this.checkConnection() === $window.Connection.UKNOWN)) {
+            if((this.checkConnection() === $window.Connection.NONE) || (this.checkConnection() === $window.Connection.UNKNOWN)) {
                 online = false;
             } else {
                 online = true;
