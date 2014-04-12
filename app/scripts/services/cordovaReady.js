@@ -9,9 +9,7 @@ angular.module('angularCordovaWrapper')
 
             $window.document.addEventListener('deviceready', function() {
 
-                $timeout(function () {
                     deferred.resolve('cordova ready');
-                });
             }, false);
 
             return deferred.promise;
